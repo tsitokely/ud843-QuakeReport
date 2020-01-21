@@ -14,7 +14,7 @@ public class Earthquake {
     private float mMagnitude;
 
     //date at which the earthquake happened
-    private long mDate;
+    private String mDate;
 
     /**
      * Constructor for the earthquake object
@@ -23,7 +23,7 @@ public class Earthquake {
      * @param mag  is the magnitude of the earthquake
      * @param date is the date of the earthquake event
      */
-    public Earthquake(String city, float mag, long date) {
+    public Earthquake(String city, float mag, String date) {
         mCity = city;
         mMagnitude = mag;
         mDate = date;
@@ -48,7 +48,7 @@ public class Earthquake {
     /**
      * Getter for the date
      */
-    public long getDate(){
+    public String getDate(){
         return mDate;
     }
 }
