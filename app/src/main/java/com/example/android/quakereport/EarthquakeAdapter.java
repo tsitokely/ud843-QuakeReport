@@ -59,9 +59,11 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         TextView locationTextView = (TextView) listItemView.findViewById(R.id.location);
         TextView magnitudeTextView = (TextView) listItemView.findViewById(R.id.magnitude);
         TextView dateTextView = (TextView) listItemView.findViewById(R.id.date);
+        TextView timeTextView = (TextView) listItemView.findViewById(R.id.time);
         locationTextView.setText(currentEarthquake.getCity());
         magnitudeTextView.setText(String.valueOf(currentEarthquake.getMagnitude()));
         dateTextView.setText(currentEarthquake.getDate());
+        timeTextView.setText(currentEarthquake.getTime());
 
         // Return the whole list item layout (containing 2 TextViews and an ImageView)
         // so that it can be shown in the ListView

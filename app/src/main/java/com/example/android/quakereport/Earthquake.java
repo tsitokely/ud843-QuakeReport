@@ -16,6 +16,9 @@ public class Earthquake {
     //date at which the earthquake happened
     private String mDate;
 
+    //time at which the earthquake happened
+    private String mTime;
+
     /**
      * Constructor for the earthquake object
      *
@@ -23,10 +26,11 @@ public class Earthquake {
      * @param mag  is the magnitude of the earthquake
      * @param date is the date of the earthquake event
      */
-    public Earthquake(String city, float mag, String date) {
+    public Earthquake(String city, float mag, String date, String time) {
         mCity = city;
         mMagnitude = mag;
         mDate = date;
+        mTime = time;
     }
 
     // Methods
@@ -50,5 +54,12 @@ public class Earthquake {
      */
     public String getDate(){
         return mDate;
+    }
+
+    /**
+     * Getter for the time
+     */
+    public String getTime(){
+        return mTime;
     }
 }

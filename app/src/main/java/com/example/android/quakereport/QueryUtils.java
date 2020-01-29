@@ -70,10 +70,15 @@ public final class QueryUtils {
                 // Extract “place” for location
                 String location = property.optString("place");
 
-                // Extract “time” for time
-                SimpleDateFormat sdf = new SimpleDateFormat("MMMM dd, YYYY");
-                String time = sdf.format(new Date(property.optLong("time")));
-                earthquakes.add(new Earthquake(location,mag,time));
+                // Extract “date” from time
+                SimpleDateFormat sdfD = new SimpleDateFormat("MMMM dd, YYYY");
+                String date = sdfD.format(new Date(property.optLong("date")));
+
+                // Extract “time” from time
+                SimpleDateFormat sdfT = new SimpleDateFormat("hh:mm a");
+                String time = sdfT.format(new Date(property.optLong("time")));
+
+                earthquakes.add(new Earthquake(location,mag,date,time));
             }
 
         } catch (JSONException e) {
