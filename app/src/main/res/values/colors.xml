@@ -15,11 +15,11 @@
 -->
 <resources>
     <!-- Primary color of the app (shown in the app bar) -->
-    <color name="colorPrimary">#2B3D4D</color>
+    <color name="colorPrimary">#FB2D2D</color>
 
     <!-- Primary dark color of the app (shown in the status bar) -->
     <color name="colorPrimaryDark">#23303D</color>
 
     <!-- Accent color of the app -->
-    <color name="colorAccent">#10CAC9</color>
+    <color name="colorAccent">#D5BD0B</color>
 </resources>
