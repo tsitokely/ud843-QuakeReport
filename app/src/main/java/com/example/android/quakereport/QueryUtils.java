@@ -65,20 +65,15 @@ public final class QueryUtils {
                 JSONObject property = earthquake.getJSONObject("properties");
 
                 // Extract “mag” for magnitude
-                float mag = (float)property.optDouble("mag");
+                String mag = property.optString("mag");
 
                 // Extract “place” for location
                 String location = property.optString("place");
 
-                // Extract “date” from time
-                SimpleDateFormat sdfD = new SimpleDateFormat("MMMM dd, YYYY");
-                String date = sdfD.format(new Date(property.optLong("date")));
+                // Extract the value for the key called "time"
+                long time = property.getLong("time");
 
-                // Extract “time” from time
-                SimpleDateFormat sdfT = new SimpleDateFormat("hh:mm a");
-                String time = sdfT.format(new Date(property.optLong("time")));
-
-                earthquakes.add(new Earthquake(location,mag,date,time));
+                earthquakes.add(new Earthquake(mag,location,time));
             }
 
         } catch (JSONException e) {

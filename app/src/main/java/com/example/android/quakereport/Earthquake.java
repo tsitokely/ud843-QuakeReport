@@ -8,58 +8,48 @@ package com.example.android.quakereport;
 public class Earthquake {
 
     // name of the location where the earthquake happened
-    private String mCity;
+    private String mLocation;
 
     //magnitude of the earthquake
-    private float mMagnitude;
+    private String mMagnitude;
 
-    //date at which the earthquake happened
-    private String mDate;
-
-    //time at which the earthquake happened
-    private String mTime;
+    /** Time of the earthquake */
+    private long mTimeInMilliseconds;
 
     /**
-     * Constructor for the earthquake object
+     * Constructs a new {@link Earthquake} object.
      *
-     * @param city is the city where the earthquake happened
-     * @param mag  is the magnitude of the earthquake
-     * @param date is the date of the earthquake event
+     * @param magnitude is the magnitude (size) of the earthquake
+     * @param location is the city location of the earthquake
+     * @param timeInMilliseconds is the time in milliseconds (from the Epoch) when the
+     *  earthquake happened
      */
-    public Earthquake(String city, float mag, String date, String time) {
-        mCity = city;
-        mMagnitude = mag;
-        mDate = date;
-        mTime = time;
+    public Earthquake(String magnitude, String location, long timeInMilliseconds) {
+        mMagnitude = magnitude;
+        mLocation = location;
+        mTimeInMilliseconds = timeInMilliseconds;
     }
 
     // Methods
 
     /**
-     * Getter for the city
+     * Getter for the location
      */
-    public String getCity() {
-        return mCity;
+    public String getLocation() {
+        return mLocation;
     }
 
     /**
      * Getter for the magnitude
      */
-    public float getMagnitude(){
+    public String getMagnitude(){
         return mMagnitude;
     }
 
     /**
-     * Getter for the date
+     * Returns the time of the earthquake.
      */
-    public String getDate(){
-        return mDate;
-    }
-
-    /**
-     * Getter for the time
-     */
-    public String getTime(){
-        return mTime;
+    public long getTimeInMilliseconds() {
+        return mTimeInMilliseconds;
     }
 }
