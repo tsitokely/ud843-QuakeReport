@@ -11,7 +11,7 @@ class Earthquake {
     private String mLocation;
 
     //magnitude of the earthquake
-    private String mMagnitude;
+    private double mMagnitude;
 
     /** Time of the earthquake */
     private long mTimeInMilliseconds;
@@ -24,7 +24,7 @@ class Earthquake {
      * @param timeInMilliseconds is the time in milliseconds (from the Epoch) when the
      *  earthquake happened
      */
-    public Earthquake(String magnitude, String location, long timeInMilliseconds) {
+    public Earthquake(double magnitude, String location, long timeInMilliseconds) {
         mMagnitude = magnitude;
         mLocation = location;
         mTimeInMilliseconds = timeInMilliseconds;
@@ -42,7 +42,7 @@ class Earthquake {
     /**
      * Getter for the magnitude
      */
-    public String getMagnitude(){
+    public Double getMagnitude(){
         return mMagnitude;
     }
 

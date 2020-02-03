@@ -65,7 +65,7 @@ final class QueryUtils {
                 JSONObject property = earthquake.getJSONObject("properties");
 
                 // Extract “mag” for magnitude
-                String mag = property.optString("mag");
+                double mag = property.optDouble("mag");
 
                 // Extract “place” for location
                 String location = property.optString("place");
