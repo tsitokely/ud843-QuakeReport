@@ -17,6 +17,7 @@ import java.util.Locale;
  * based on data source, which is a list of {@link Earthquake} objects.
  */
 class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
+    private static final String LOCATION_SEPARATOR = " of ";
 
     private static final String LOG_TAG = EarthquakeAdapter.class.getSimpleName();
 
@@ -103,11 +104,13 @@ class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
      */
     private String[] formatLocation(String location) {
         String[] locationParts = new String[2];
-        if(location.contains(",")){
-            locationParts = location.split(",");
+        if(location.contains(LOCATION_SEPARATOR)){
+            locationParts = location.split(LOCATION_SEPARATOR);
+            locationParts[1] = locationParts[1];
+            locationParts[0] = locationParts[0] + LOCATION_SEPARATOR;
         } else {
-            locationParts[1] = "Near the " + location;
-            locationParts[0] = "";
+            locationParts[1] = location;
+            locationParts[0] = getContext().getString(R.string.near_the);
         }
         locationParts[1] = locationParts[1].trim();
         locationParts[0] = locationParts[0].trim();
