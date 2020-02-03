@@ -5,7 +5,7 @@ package com.example.android.quakereport;
  * Each object has 3 attributes: city, magnitude, date
  */
 
-public class Earthquake {
+class Earthquake {
 
     // name of the location where the earthquake happened
     private String mLocation;

@@ -5,11 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,7 +16,7 @@ import java.util.Locale;
  * {@link EarthquakeAdapter} is an {@link ArrayAdapter} that can provide the layout each list
  * based on data source, which is a list of {@link Earthquake} objects.
  */
-public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
+class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
     private static final String LOG_TAG = EarthquakeAdapter.class.getSimpleName();
 
@@ -56,24 +53,27 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
             listItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.list_item, parent, false);
         }
-
         // Get the {@link Earthquake} object located at this position in the list
         Earthquake currentEarthquake = getItem(position);
-
         // maps id to object attributes
-        TextView locationTextView = (TextView) listItemView.findViewById(R.id.location);
+        TextView locationPrimaryTextView =
+                (TextView) listItemView.findViewById(R.id.location_primary);
+        TextView locationOffsetTextView =
+                (TextView) listItemView.findViewById(R.id.location_offset);
         TextView magnitudeTextView = (TextView) listItemView.findViewById(R.id.magnitude);
         TextView dateTextView = (TextView) listItemView.findViewById(R.id.date);
         TextView timeTextView = (TextView) listItemView.findViewById(R.id.time);
-        locationTextView.setText(currentEarthquake.getLocation());
+        String location = currentEarthquake.getLocation();
+        String[] LocationArray = formatLocation(location);
+        locationPrimaryTextView.setText(LocationArray[1]);
+        locationOffsetTextView.setText(LocationArray[0]);
         magnitudeTextView.setText(String.valueOf(currentEarthquake.getMagnitude()));
         // Create a new Date object from the time in milliseconds of the earthquake
         Date dateObject = new Date(currentEarthquake.getTimeInMilliseconds());
         String formattedTime = formatTime(dateObject);
-        String formattedDate  = formatDate(dateObject);
+        String formattedDate = formatDate(dateObject);
         dateTextView.setText(formattedDate);
         timeTextView.setText(formattedTime);
-
         // Return the whole list item layout (containing 2 TextViews and an ImageView)
         // so that it can be shown in the ListView
         return listItemView;
@@ -84,7 +84,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
      * Return the formatted date string (i.e. "Mar 3, 1984") from a Date object.
      */
     private String formatDate(Date dateObject) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("LLL dd, yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("LLL dd, yyyy", Locale.US);
         return dateFormat.format(dateObject);
     }
 
@@ -92,7 +92,26 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
      * Return the formatted date string (i.e. "4:30 PM") from a Date object.
      */
     private String formatTime(Date dateObject) {
-        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a", Locale.US);
         return timeFormat.format(dateObject);
     }
+
+    /**
+     * Return the primary location with its offset
+     *
+     * @return
+     */
+    private String[] formatLocation(String location) {
+        String[] locationParts = new String[2];
+        if(location.contains(",")){
+            locationParts = location.split(",");
+        } else {
+            locationParts[1] = "Near the " + location;
+            locationParts[0] = "";
+        }
+        locationParts[1] = locationParts[1].trim();
+        locationParts[0] = locationParts[0].trim();
+        return locationParts;
+    }
+
 }
