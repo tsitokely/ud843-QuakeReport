@@ -62,7 +62,7 @@ class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         Earthquake currentEarthquake = getItem(position);
         // maps id to object attributes
         TextView locationPrimaryTextView =
-                (TextView) listItemView.findViewById(R.id.location_primary);
+                (TextView) listItemView.findViewById(R.id.primary_location);
         TextView locationOffsetTextView =
                 (TextView) listItemView.findViewById(R.id.location_offset);
         TextView magnitudeTextView = (TextView) listItemView.findViewById(R.id.magnitude);
