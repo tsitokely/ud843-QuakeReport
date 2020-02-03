@@ -1,6 +1,7 @@
 package com.example.android.quakereport;
 
 import android.app.Activity;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import android.graphics.drawable.GradientDrawable;
 
 /**
  * {@link EarthquakeAdapter} is an {@link ArrayAdapter} that can provide the layout each list
@@ -55,6 +57,7 @@ class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
             listItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.list_item, parent, false);
         }
+
         // Get the {@link Earthquake} object located at this position in the list
         Earthquake currentEarthquake = getItem(position);
         // maps id to object attributes
@@ -77,10 +80,62 @@ class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         String formattedDate = formatDate(dateObject);
         dateTextView.setText(formattedDate);
         timeTextView.setText(formattedTime);
+        // Set the proper background color on the magnitude circle.
+        // Fetch the background from the TextView, which is a GradientDrawable.
+        GradientDrawable magnitudeCircle = (GradientDrawable) magnitudeTextView.getBackground();
+
+        // Get the appropriate background color based on the current earthquake magnitude
+        int magnitudeColor = getMagnitudeColor(currentEarthquake.getMagnitude());
+
+        // Set the color on the magnitude circle
+        magnitudeCircle.setColor(magnitudeColor);
+
         // Return the whole list item layout (containing 2 TextViews and an ImageView)
         // so that it can be shown in the ListView
+
         return listItemView;
 
+    }
+
+    private int getMagnitudeColor(Double magnitude) {
+        int magnitude_int = (int) Math.floor(magnitude);
+        int magnitudeColor = 0;
+
+        switch(magnitude_int){
+            case 0:
+            case 1:
+                magnitudeColor = R.color.magnitude1;
+                break;
+            case 2:
+                magnitudeColor = R.color.magnitude2;
+                break;
+            case 3:
+                magnitudeColor = R.color.magnitude3;
+                break;
+            case 4:
+                magnitudeColor = R.color.magnitude4;
+                break;
+            case 5:
+                magnitudeColor = R.color.magnitude5;
+                break;
+            case 6:
+                magnitudeColor = R.color.magnitude6;
+                break;
+            case 7:
+                magnitudeColor = R.color.magnitude7;
+                break;
+            case 8:
+                magnitudeColor = R.color.magnitude8;
+                break;
+            case 9:
+                magnitudeColor = R.color.magnitude9;
+                break;
+            case 10:
+                magnitudeColor = R.color.magnitude10plus;
+                break;
+        }
+
+        return ContextCompat.getColor(getContext(), magnitudeColor);
     }
 
     /**
