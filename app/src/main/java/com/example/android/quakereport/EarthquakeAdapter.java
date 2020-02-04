@@ -1,11 +1,15 @@
 package com.example.android.quakereport;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -14,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import android.graphics.drawable.GradientDrawable;
+
+import android.support.v4.app.ActivityCompat;
 
 /**
  * {@link EarthquakeAdapter} is an {@link ArrayAdapter} that can provide the layout each list
@@ -59,8 +65,10 @@ class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         }
 
         // Get the {@link Earthquake} object located at this position in the list
-        Earthquake currentEarthquake = getItem(position);
+        final Earthquake currentEarthquake = getItem(position);
         // maps id to object attributes
+
+        //layout elements declaration
         TextView locationPrimaryTextView =
                 (TextView) listItemView.findViewById(R.id.primary_location);
         TextView locationOffsetTextView =
@@ -68,18 +76,26 @@ class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         TextView magnitudeTextView = (TextView) listItemView.findViewById(R.id.magnitude);
         TextView dateTextView = (TextView) listItemView.findViewById(R.id.date);
         TextView timeTextView = (TextView) listItemView.findViewById(R.id.time);
+        ListView titleList = (ListView) listItemView.findViewById(R.id.list);
+
+        //get values for the elements
+        //Location
         String location = currentEarthquake.getLocation();
         String[] LocationArray = formatLocation(location);
         locationPrimaryTextView.setText(LocationArray[1]);
         locationOffsetTextView.setText(LocationArray[0]);
+        //Magnitude
         DecimalFormat formatter = new DecimalFormat("0.0");
         magnitudeTextView.setText(formatMagnitude(currentEarthquake.getMagnitude()));
-        // Create a new Date object from the time in milliseconds of the earthquake
+        //Date
+        //Create a new Date object from the time in milliseconds of the earthquake
         Date dateObject = new Date(currentEarthquake.getTimeInMilliseconds());
         String formattedTime = formatTime(dateObject);
         String formattedDate = formatDate(dateObject);
         dateTextView.setText(formattedDate);
         timeTextView.setText(formattedTime);
+
+
         // Set the proper background color on the magnitude circle.
         // Fetch the background from the TextView, which is a GradientDrawable.
         GradientDrawable magnitudeCircle = (GradientDrawable) magnitudeTextView.getBackground();
@@ -90,9 +106,9 @@ class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         // Set the color on the magnitude circle
         magnitudeCircle.setColor(magnitudeColor);
 
+
         // Return the whole list item layout (containing 2 TextViews and an ImageView)
         // so that it can be shown in the ListView
-
         return listItemView;
 
     }

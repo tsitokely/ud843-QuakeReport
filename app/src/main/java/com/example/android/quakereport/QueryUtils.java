@@ -73,7 +73,10 @@ final class QueryUtils {
                 // Extract the value for the key called "time"
                 long time = property.getLong("time");
 
-                earthquakes.add(new Earthquake(mag,location,time));
+                // Extract the value for the url
+                String url = property.getString("url");
+
+                earthquakes.add(new Earthquake(mag,location,time,url));
             }
 
         } catch (JSONException e) {
