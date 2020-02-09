@@ -22,18 +22,25 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EarthquakeActivity extends AppCompatActivity {
-    /** Adapter for the list of earthquakes */
+    /**
+     * Adapter for the list of earthquakes
+     */
     private EarthquakeAdapter mAdapter;
 
     private static final String USGS_REQUEST_URL =
-            "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&minmag=6&limit=10";
+            "https://earthquake.usgs.gov/fdsnws/event/1/query?" +
+                    "format=geojson&" +
+                    "eventtype=earthquake&" +
+                    "starttime=2019-01-01&" +
+                    "orderby=time&" +
+                    "minmag=6&" +
+                    "limit=100";
 
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
 
@@ -76,10 +83,10 @@ public class EarthquakeActivity extends AppCompatActivity {
 
     }
 
-    private class EarthquakeAsyncTask extends AsyncTask<String, Void, List<Earthquake>>{
+    private class EarthquakeAsyncTask extends AsyncTask<String, Void, List<Earthquake>> {
 
         @Override
-        protected List<Earthquake> doInBackground(String... urls){
+        protected List<Earthquake> doInBackground(String... urls) {
             // Don't perform the request if there are no URLs, or the first URL is null.
             if (urls.length < 1 || urls[0] == null) {
                 return null;
@@ -96,7 +103,7 @@ public class EarthquakeActivity extends AppCompatActivity {
 
             // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
             // data set. This will trigger the ListView to update.
-            if(data != null && !data.isEmpty()){
+            if (data != null && !data.isEmpty()) {
                 mAdapter.addAll(data);
             }
 

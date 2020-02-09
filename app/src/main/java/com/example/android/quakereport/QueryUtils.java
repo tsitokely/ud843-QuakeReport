@@ -39,7 +39,7 @@ final class QueryUtils {
      */
     public static List<Earthquake> extractFeatureFromJson(String earthquakeJSON) {
         //If the JSON string is empty or null, then return null early
-        if(TextUtils.isEmpty(earthquakeJSON)){
+        if (TextUtils.isEmpty(earthquakeJSON)) {
             return null;
         }
 
@@ -52,21 +52,21 @@ final class QueryUtils {
         try {
 
             // Convert SAMPLE_JSON_RESPONSE String into a JSONObject
-            JSONObject baseJsonResponse  = new JSONObject(earthquakeJSON);
+            JSONObject baseJsonResponse = new JSONObject(earthquakeJSON);
 
             // Extract “features” JSONArray
-            JSONArray earthquakeArray  = baseJsonResponse .getJSONArray("features");
+            JSONArray earthquakeArray = baseJsonResponse.getJSONArray("features");
 
             // Loop through each feature in the array
-            for (int i = 0; i < earthquakeArray .length(); i++) {
+            for (int i = 0; i < earthquakeArray.length(); i++) {
                 // Get earthquake JSONObject at position i
-                JSONObject currentEarthquake  = earthquakeArray .getJSONObject(i);
+                JSONObject currentEarthquake = earthquakeArray.getJSONObject(i);
 
                 // Get “properties” JSONObject
-                JSONObject property = currentEarthquake .getJSONObject("properties");
+                JSONObject property = currentEarthquake.getJSONObject("properties");
 
                 // Extract “mag” for magnitude
-                double magnitude  = property.optDouble("mag");
+                double magnitude = property.optDouble("mag");
 
                 // Extract “place” for location
                 String location = property.optString("place");
@@ -79,7 +79,7 @@ final class QueryUtils {
 
                 // Create a new {@link Earthquake} object with the magnitude, location, time,
                 // and url from the JSON response.
-                Earthquake earthquake = new Earthquake(magnitude , location, time, url);
+                Earthquake earthquake = new Earthquake(magnitude, location, time, url);
 
                 // Add the new {@link Earthquake} to the list of earthquakes.
                 earthquakes.add(earthquake);
@@ -176,16 +176,16 @@ final class QueryUtils {
     /**
      * Query the USGS dataset and return a list of {@link Earthquake} objects.
      */
-    public static List<Earthquake> fetchEarthQuakeData(String requestUrl){
+    public static List<Earthquake> fetchEarthQuakeData(String requestUrl) {
         //Create URL object
         URL url = createUrl(requestUrl);
 
         // Perform HTTP request to the URL and receive a JSON response back
         String jsonResponse = null;
-        try{
+        try {
             jsonResponse = makeHTTPrequest(url);
-        }catch(IOException e){
-            Log.e(LOG_TAG,"Problem making the HTTP Request.",e);
+        } catch (IOException e) {
+            Log.e(LOG_TAG, "Problem making the HTTP Request.", e);
         }
 
         // Extract relevant fields from the JSON response and create a list of {@link Earthquake}s

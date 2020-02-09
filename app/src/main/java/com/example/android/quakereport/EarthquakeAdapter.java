@@ -1,27 +1,20 @@
 package com.example.android.quakereport;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
+import android.graphics.drawable.GradientDrawable;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-import android.graphics.drawable.GradientDrawable;
-
-import android.support.v4.app.ActivityCompat;
 
 /**
  * {@link EarthquakeAdapter} is an {@link ArrayAdapter} that can provide the layout each list
@@ -119,7 +112,7 @@ class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         int magnitude_int = (int) Math.floor(magnitude);
         int magnitudeColor = 0;
 
-        switch(magnitude_int){
+        switch (magnitude_int) {
             case 0:
             case 1:
                 magnitudeColor = R.color.magnitude1;
@@ -179,7 +172,7 @@ class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
      */
     private String[] formatLocation(String location) {
         String[] locationParts = new String[2];
-        if(location.contains(LOCATION_SEPARATOR)){
+        if (location.contains(LOCATION_SEPARATOR)) {
             locationParts = location.split(LOCATION_SEPARATOR);
             locationParts[1] = locationParts[1];
             locationParts[0] = locationParts[0] + LOCATION_SEPARATOR;
