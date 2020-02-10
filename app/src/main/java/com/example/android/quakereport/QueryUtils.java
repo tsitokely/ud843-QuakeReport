@@ -99,7 +99,7 @@ final class QueryUtils {
     /**
      * Returns new URL object from the given string URL.
      */
-    private static URL createUrl(String stringURL) {
+    public static URL createUrl(String stringURL) {
         URL url = null;
         try {
             url = new URL(stringURL);
@@ -188,11 +188,9 @@ final class QueryUtils {
             Log.e(LOG_TAG, "Problem making the HTTP Request.", e);
         }
 
-        // Extract relevant fields from the JSON response and create a list of {@link Earthquake}s
-        List<Earthquake> earthquakes = extractFeatureFromJson(jsonResponse);
-
+        // Extract relevant fields from the JSON response and
         // Return the list of {@link Earthquake}s
-        return earthquakes;
+        return extractFeatureFromJson(jsonResponse);
     }
 
 
